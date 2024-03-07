@@ -6,7 +6,7 @@
 <section class="CreateNLog">
     <div>
         <p class="headingForm">Register</p>
-        <form action="<?php ?>" method="post">
+        <form action="register.php" method="post">
             <div class="formsch">
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" name="firstname" id="firstname" placeholder="First Name" required>
@@ -63,11 +63,11 @@
 </footer>
 
 <?php	
-	if(isset($_POST['btnRegister'])){		
+	if($_SERVER['REQUEST_METHOD'] === 'POST'){		
 		//retrieve data from form and save the value to a variable
 		//for tbluserprofile
-		$fname=$_POST['firstName'];		
-		$lname=$_POST['lastName'];
+		$fname=$_POST['firstname'];		
+		$lname=$_POST['lastname'];
 		$bdate=$_POST['birthdate'];
 		
 		//for tbluseraccount
@@ -79,16 +79,20 @@
 		$sql1 ="Insert into tbluserprofile(firstname,lastname,birthdate) values('".$fname."','".$lname."', '".$bdate."')";
 		mysqli_query($connection,$sql1);
 		
+        $sqlUser_ID = $connection -> insert_id;
 		//Check tbluseraccount if username is already existing. Save info if false. Prompt msg if true.
 		$sql2 ="Select * from tbluseraccount where username='".$uname."'";
 		$result = mysqli_query($connection,$sql2);
 		$row = mysqli_num_rows($result);
 		if($row == 0){
-			$sql ="Insert into tbluseraccount(email_add,username,password) values('".$email."','".$uname."','".$pword."')";
+			$sql ="Insert into tbluseraccount(user_id, email_add,username,password) values('.$sqlUser_ID.', '".$email."','".$uname."','".$pword."')";
 			mysqli_query($connection,$sql);
 			echo "<script language='javascript'>
 						alert('New record saved.');
+                        window.location.replace('login.php');
 				  </script>";
+        // header("location: login.php");
+            exit();
 		}else{
 			echo "<script language='javascript'>
 						alert('Username already existing');
@@ -96,6 +100,5 @@
 		}
 	}
 		
-
 ?>
    
