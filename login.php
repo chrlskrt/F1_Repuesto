@@ -2,11 +2,62 @@
     include("connect.php");
     include_once("includes/header.php");
 ?>
+<!-- MODALS -->
+<div class="modal fade" tabindex="-1" role="dialog" id="errorModal">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Whoops</h5>
+      </div>
+      <div class="modal-body">
+        <p>Username and password does not match anything in our records. Try again or sign up.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <a href="register.php" class="btn btn-outline-success">Sign Up</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="unameErrorModal">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Whoops</h5>
+      </div>
+      <div class="modal-body">
+        <p> Username does not exists in our records. Try again or sign up.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <a href="register.php" class="btn btn-outline-success">Sign Up</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="passErrorModal">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Whoops</h5>
+      </div>
+      <div class="modal-body">
+        <p>Incorrect password.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <!-- <a href="register.php" class="btn btn-outline-success">SIGN UP</a> -->
+      </div>
+    </div>
+  </div>
+</div>
 
 <section class="CreateNLog">
     <div>
-        <p class="headingForm">Log In</p>
-        <form action="" method="post">
+        <p class="label">Log In</p>
+        <form action="login.php" method="post">
             <div class="formsch">
                 <div class="form-floating mb-3">
                     
@@ -22,12 +73,12 @@
 
             </div>
         </form>
-        <p>Don't have an account? <a href="register.html" style="color:blue">Register</a></p>
+        <p>Don't have an account? <a href="register.php" style="color:blue">Sign Up</a></p>
     </div>
 </section>
 
 <footer>
-    <nav class="navbar navbar-success bg-success">
+    <nav class="navbar">
         <a class="navbar-brand" href="#">
             Charlene Repuesto
             <br>
@@ -36,29 +87,39 @@
     </nav>
 </footer>
 
-<?php	
-	if(isset($_POST['btnLogin'])){
-		$uname=$_POST['username'];
-		$pwd=$_POST['password'];
+<?php
+    if($_SERVER['REQUEST_METHOD']==='POST'){
+		$uname = $_POST['username'];
+		$pass = $_POST['password'];
 		//check tbluseraccount if username is existing
-		$sql ="Select * from tbluseraccount where username='".$uname."'";
+		$sql ="SELECT * from tbluseraccount where username='".$uname."'";
 		
 		$result = mysqli_query($connection,$sql);	
 		
 		$count = mysqli_num_rows($result);
 		$row = mysqli_fetch_array($result);
 		
-		if($count== 0){
+
+        if ($count != 0 && password_verify($pass, $row[4])){
+            // if naa nay concept na log-out log-out or mag add ta
+            // $logInCookie = urlencode(base64_encode(serialize($row)));
+            // setcookie('user', $logInCookie, time() + (86400 * 30), "/");
 			echo "<script language='javascript'>
-						alert('username not existing.');
+                        window.location.replace('index.php');
+                </script>";
+        } else if($count == 0) {
+			echo "<script language = 'javascript'>
+						$(function(){
+                            $('#unameErrorModal').modal('show');
+                        })
 				  </script>";
-		}else if($row[3] != $pwd) {
-			echo "<script language='javascript'>
-						alert('Incorrect password');
+		 } else {
+            echo "<script language = 'javascript'>
+						$(function(){
+                            $('#username').val('".$uname."');
+                            $('#passErrorModal').modal('show');
+                        })
 				  </script>";
-		}else{
-			$_SESSION['username']=$row[0];
-			header("location: index.php");
 		}
 	}
 ?>

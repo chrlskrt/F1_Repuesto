@@ -5,6 +5,7 @@ body {
     display: flex;
     height: 100vh;
     flex-direction: column;
+    background-color: #e7e7e7;
 }
 
 .container , .CreateNLog {
@@ -20,18 +21,33 @@ body {
     align-items: center;
     justify-content: space-around;
 }
- 
+
+.main-container {
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-container > div {
+    margin-top: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.main-container-nopaddings {
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    display: flex;
+    flex-direction: column;
+}
+
 .img-icon {
     height: 200px;
     width: 200px;
-}
- 
-.card {
-    border-color: transparent;
-}
- 
-.card-img-top {
-    border-radius: 50%;
 }
  
 .title {
@@ -52,6 +68,16 @@ hr {
     text-align: center;
     font-size: 10em;
     padding: 5%;
+    background-color: #ffffff;
+    color: black;
+}
+
+.label {
+    font-family: "Josefin Sans", sans-serif;
+    font-weight:bold;
+    font-size: 50px;
+    text-align: center;
+    color: black;
 }
 
 a {
@@ -91,6 +117,113 @@ a {
 .navbar {
     padding: 10px;
     width: 100%;
-    background-color: #59f3c7;
+    background-color: #40dbc4;
     justify-content: space-between;
+}
+
+.img-fluid {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.card2 {
+    height: 280px;
+    width: 208px;
+    box-shadow: 8px 10px 3px #9fc0c1;
+}
+
+.card2-img {
+    height: 208px;
+    width: 208px;
+    border-radius: 10px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.card2-name {
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    bottom:20px; 
+    position:relative;
+}
+
+.card2-logo {
+    height: 60px;
+    width: 60px;
+    z-index: 1;
+    position: relative;
+    bottom: 30px;    
+    border:solid 5px white;
+    border-radius: 50%;
+}
+
+.cardContent {  
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+    background-color: white;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    box-shadow: 8px 10px 5px #9fc0c1;
+}
+
+.fanbases {
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.fanbaseBanner {
+    position: relative;
+    color: white;
+}
+
+.centeredBanner-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.white-container {
+    background-color: white;
+    box-shadow: 8px 10px 5px #9fc0c1;
+    display: flex; /* Use flexbox layout */
+    align-items: center; /* Align items vertically */
+    justify-content: space-between; /* Add space between image and text */
+}
+
+.white-container > div {
+    margin: 30px;
+}
+
+.tile-image {
+    height: 150px;
+    width: 150px;
+    margin: 30px;
+    margin-right: 10px;
+}
+
+.text {
+    font-size: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: normal;
+}
+
+.socialmedia-logo {
+    height: 40px;
+    width: 40px;
+    margin-right: 10px;
+    align-items: start;
+}
+
+.socialmedia-container {
+    align-items:start; 
+    justify-content:left;
+}
+
+.modal-footer > var {
+    border-top: none;
 }
