@@ -221,7 +221,7 @@
             return;
         }
 
-        $sql ="Insert into tbluseraccount(user_id, email_add,username,password) values('.$sqlUser_ID.', '".$email."','".$uname."','".$pword."')";
+        $sql ="INSERT into tbluseraccount(user_id, email_add,username,password) values ('.$sqlUser_ID.', '".$email."','".$uname."','".$pword."')";
         mysqli_query($connection,$sql);
         echo "<script language='javascript'>
             $(function(){
