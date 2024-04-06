@@ -1,5 +1,4 @@
 <?php
-    // include("connect.php");
     include_once("includes/header.php");
 ?>
 <!-- MODALS -->
@@ -48,7 +47,6 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <!-- <a href="register.php" class="btn btn-outline-success">SIGN UP</a> -->
       </div>
     </div>
   </div>
@@ -86,3 +84,22 @@
         </a>
     </nav>
 </footer>
+
+<?php
+  if (isset($_GET['login_error_1'])){
+    echo "<script language = 'javascript'>
+          $(function(){
+            $('#unameErrorModal').modal('show');
+          })
+      </script>";
+  }
+
+  if (isset($_GET['login_error_2'])){
+    echo "<script language = 'javascript'>
+						$(function(){
+							$('#username').val('".$_GET['login_error_2']."');
+							$('#passErrorModal').modal('show');
+						})
+				</script>";
+  }
+?>
