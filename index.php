@@ -1,5 +1,5 @@
 <?php 
-  include_once("includes/header.php");
+    include("includes/header.php");
 ?>
 
 <!-- <div class="container">
@@ -20,38 +20,63 @@
     <br><h3> <b> POPULAR FANBASES </b> </h3>
   </div>
 
-  <div class="flex-container fanbases" style="justify-content:start;">
 
-    <div class="card2">
-      <img src="images/grptxt1.jpg" class="card2-img">
-      <div class="cardContent">
-        <img src="images/grptxtLogo.png" class="card2-logo"> 
-         <p class="card2-name">TOMORROW X TOGETHER </p>
-      </div>
-    </div> 
+  <?php 
+
+    function displayFanbases() {
+      global $connection;
+
+        $sqlfanbase = "SELECT * FROM tblfanbase";
+        $resultfanbase = mysqli_query($connection, $sqlfanbase);
+        
+        $fanbaseArray = array();
+
+        if ($resultfanbase){
+            /* query is a success
+            /* looping thru every row of record sa tblfanbase */
+            while ($row = $resultfanbase->fetch_assoc()) {
+                /* $row = 1 fanbase entry
+                /* iadd siya sa fanbase array */
+                $fanbaseArray[] = $row;
+            } 
+
+            $resultfanbase->free(); // freeing result set
+        }
+
+        $fanbaseCard = NULL;
+
+        foreach($fanbaseArray as $fanbase) {
+          $fanbaseCard .= '
+          
+          <a href="fanbase.php?fanbase_ID='.$fanbase['fanbase_id'].'" class="card2">
+            <img src="images/grp'.$fanbase['fanbase_name'].'.jpg" class="card2-img">
+            <div class="cardContent">
+              <img src="images/grp'.$fanbase['fanbase_name'].'Logo.jpg" class="card2-logo"> 
+              <p class="card2-name">'.$fanbase['fanbase_artist'].' </p>
+            </div>
+          </a>
+
+          ';
+        }
+
+        return $fanbaseCard;
+    }
+  ?>
+
+  <div class="flex-container fanbases" style="justify-content:start; ">
+
+  <?php echo displayFanbases(); ?>
     
+  <!-- <form action="fanbase.php" method="GET">
     <div class="card2">
-      <img src="images/grpsvt.jpg" class="card2-img">
+      <img src="images/grpcarat.jpg" class="card2-img">
       <div class="cardContent">
         <img src="images/grpsvtLogo.jpg" class="card2-logo"> 
          <p class="card2-name">SEVENTEEN</p>
+         <button type="submit" role ="button" value="1" name="fanbase_ID"> View Fanbase </button>
       </div>
     </div>
-    <div class="card2">
-      <img src="images/grpbts.jpg" class="card2-img">
-      <div class="cardContent">
-        <img src="images/grpbtsLogo.jpg" class="card2-logo"> 
-         <p class="card2-name"> BTS </p>
-      </div>
-    </div> 
-    
-    <div class="card2">
-      <img src="images/grpblackpink.jpg" class="card2-img">
-      <div class="cardContent">
-        <img src="images/grpblackpinkLogo.jpg" class="card2-logo"> 
-         <p class="card2-name">BLACKPINK</p>
-      </div>
-    </div>
+</form> -->
 
   </div>
 </div>

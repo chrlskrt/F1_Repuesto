@@ -40,6 +40,10 @@
             
             <?php
                 if($current_user){
+                    if ($current_user['isSysAdmin'] == 1){
+                        echo '<a href="manageApp.php" class="btn btn-outline-light">Manage App</a> ';
+                    }
+                    
                     echo '<a href="logOutUser.php" class="btn btn-outline-light">Log Out</a>';
                 }
             ?>

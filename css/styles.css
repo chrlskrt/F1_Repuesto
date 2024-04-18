@@ -78,6 +78,7 @@ hr {
     font-size: 50px;
     text-align: center;
     color: black;
+    margin-bottom: 0;
 }
 
 a {
@@ -226,4 +227,37 @@ a {
 
 .modal-footer > var {
     border-top: none;
+}
+
+
+/* manageApp.php */
+.manageAppDiv , .manageFanbaseDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: fit-content;
+    padding:10px;
+}
+
+.manageAppTable {
+    border: 2px black solid; 
+    --bs-table-bg: #e7e7e7;
+}
+
+.manageFanbaseDiv > .label {
+    display: flex;
+    font-size: 3vw;
+    align-items: center;
+    justify-content: center;
+    border: none;
+}
+
+.manageFanbaseDiv > div {
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    align-items: center;
+    justify-content: center;
 }
