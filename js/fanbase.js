@@ -11,7 +11,7 @@ $(function(){
         
     // })
 
-    if ($("#btnLeaveFanbase").length){
+    if ($("#btnLeaveFanbase").length){ 
         $("#mainFanbaseContent").show();
     } else {
         $("#mainFanbaseContent").hide();

@@ -7,8 +7,8 @@
 
     var_dump($_POST);
     $stmtUpdateFanbase = $connection->prepare("UPDATE tblFanbase 
-                                SET fanbase_description = ? , date_created = ? 
-                                WHERE fanbase_name = ?");
+                                                SET fanbase_description = ? , date_created = ? 
+                                                WHERE fanbase_name = ?");
     $stmtUpdateFanbase->bind_param("sss", $new_desc, $new_date, $fanbase);
     $stmtUpdateFanbase->execute();
     $stmtUpdateFanbase->close();
